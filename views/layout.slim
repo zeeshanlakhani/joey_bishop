@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Sinatra-BoilerPlate
+    meta charset="utf-8"
+      
+  body
+    header
+      h1 title
+      a href="http://slim-lang.com/" Slim
+    
+    == yield
+    
+  footer
+    == slim :test
+    small
+      | Copyright #{Time.now.year} NYPL_Labs
