@@ -1,4 +1,3 @@
-# = source (there are others but whatever)
 source :rubygems
 
 # = All =
