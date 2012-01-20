@@ -20,8 +20,8 @@ class Application < Sinatra::Base
 	# ==================================
 	# = Registrations and Helpers here =
 	# ==================================
-	register Sinatra::Loader
 	register Sinatra::Synchrony
+	register Sinatra::Loader
 	configure do
 		load_helpers MyHelpers
 	end
@@ -36,7 +36,6 @@ class Application < Sinatra::Base
 		builder.use Faraday::Adapter::EMSynchrony 
 	end
 
-
 	use Rack::Cache,
 		:verbose => true,
 		:metastore =>'heap:/',
@@ -49,7 +48,7 @@ class Application < Sinatra::Base
 
 	#server settings
 	disable :run
-	set :server, %w[thin mongrel webrick]
+	set :server, %w[thin webrick]
 
 	#directory settings => these are actually default to sinatra, but let's do it anyways
 	set :static, true
