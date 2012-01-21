@@ -28,6 +28,5 @@ end
 
 group :development do
 	gem 'foreman'
-    #yesness => https://github.com/alexch/rerun
-	gem 'rerun'
+    gem 'rerun' #yesness => https://github.com/alexch/rerun
 end
