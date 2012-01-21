@@ -8,7 +8,6 @@ gem 'thin'
 gem 'bson_ext'
 gem 'mongoid', :require => 'mongoid'
 
-gem 'daemons'
 gem 'sinatra', :require => 'sinatra/base'                
 gem 'sinatra-synchrony', :require => 'sinatra/synchrony'
 gem 'sinatra-authentication', :require => 'sinatra-authentication'
@@ -29,5 +28,5 @@ end
 
 group :development do
 	gem 'foreman'
-	gem 'shotgun'
+	gem 'rerun'
 end

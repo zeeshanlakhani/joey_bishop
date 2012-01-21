@@ -1,1 +1,1 @@
-web: rackup shotgun
+web: bundle exec rackup

@@ -17,9 +17,9 @@ Dir.glob('./*.rb') do |file|
 end
 
 class Application < Sinatra::Base
-	# ==================================
-	# = Registrations and Helpers here =
-	# ==================================
+	# =========================================
+	# = Registrations and global Helpers here =
+	# =========================================
 	register Sinatra::Synchrony
 	register Sinatra::Loader
 	configure do
@@ -62,6 +62,7 @@ class Application < Sinatra::Base
 
 	#slim settings
 	set :slim, :pretty => true
+	set :slim, :sections => false
 
 	#app based configurations
 	configure :development do
