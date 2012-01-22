@@ -6,20 +6,23 @@ gem 'rack'
 gem 'thin'
 
 gem 'bson_ext'
-gem 'mongoid', :require => 'mongoid'
+gem 'mongoid'
 
 gem 'sinatra', :require => 'sinatra/base'                
 gem 'sinatra-synchrony', :require => 'sinatra/synchrony'
-gem 'sinatra-authentication', :require => 'sinatra-authentication'
-	
-gem 'rack-cache', :require => 'rack/cache'                    
+gem 'sinatra-authentication'
 
-gem 'slim', :require => 'slim'
+#rack gems here	
+gem 'rack-cache', :require => 'rack/cache'   
 
-gem 'faraday', :require => 'faraday'
+gem 'slim'
+
+gem 'faraday'
 gem 'faraday-stack', :require => 'faraday_stack'
 
 gem 'em-synchrony', :git => "git://github.com/igrigorik/em-synchrony.git"
+
+gem 'sass'
 
 group :test do
 	gem 'rack-test', :require => 'rack/test'

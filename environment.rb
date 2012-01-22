@@ -36,6 +36,8 @@ class Application < Sinatra::Base
 		builder.use Faraday::Adapter::EMSynchrony 
 	end
 
+	#use Rack::Flash
+
 	use Rack::Cache,
 		:verbose => true,
 		:metastore =>'heap:/',

@@ -1,6 +1,9 @@
 #really, a set of controllers, but is the app!
 class Application < Sinatra::Base
-	#handlers
+
+	#scss to css handlers
+
+	#main handlers
 	get '/' do
 		log.info "The summer wind came blowin' in"
 		@idx_header = "The Joey Bishop"
