@@ -20,7 +20,9 @@ class Application < Sinatra::Base
 	# =========================================
 	# = Registrations and global Helpers here =
 	# =========================================
-	register Sinatra::Synchrony
+	#tbd
+	#register Sinatra::Synchrony
+
 	register Sinatra::Loader
 	configure do
 		load_helpers MyHelpers
@@ -29,13 +31,6 @@ class Application < Sinatra::Base
 	# ==============
 	# = Middleware =
 	# ==============
-
-	# Set EM-Synchrony to be default drive + parse JSON responses
-	Faraday.default_connection = Faraday::Connection.new do |builder|
-		builder.use FaradayStack::ResponseJSON
-		builder.use Faraday::Adapter::EMSynchrony 
-	end
-
 	#use Rack::Flash
 
 	use Rack::Cache,
@@ -46,11 +41,10 @@ class Application < Sinatra::Base
 	# ======================
 	# = Sinatra - Settings =
 	# ======================
-	root_dir = File.dirname(__FILE__)
-
 	#server settings
 	disable :run
-	set :server, %w[thin webrick]
+
+	root_dir = File.dirname(__FILE__)
 
 	#directory settings => these are actually default to sinatra, but let's do it anyways
 	set :static, true

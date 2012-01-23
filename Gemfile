@@ -3,25 +3,24 @@ source :rubygems
 # = All =
 gem 'rake'
 gem 'rack'        
-gem 'thin'
+
+gem 'puma'
+
+#backup => eventmachine
+#gem 'thin'
+
+gem 'httparty'
 
 gem 'bson_ext'
 gem 'mongoid'
 
 gem 'sinatra', :require => 'sinatra/base'                
-gem 'sinatra-synchrony', :require => 'sinatra/synchrony'
 gem 'sinatra-authentication'
 
 #rack gems here	
 gem 'rack-cache', :require => 'rack/cache'   
 
 gem 'slim'
-
-gem 'faraday'
-gem 'faraday-stack', :require => 'faraday_stack'
-
-gem 'em-synchrony', :git => "git://github.com/igrigorik/em-synchrony.git"
-
 gem 'sass'
 
 group :test do
@@ -31,5 +30,17 @@ end
 
 group :development do
 	gem 'foreman'
-    gem 'rerun' #yesness => https://github.com/alexch/rerun
+    gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
+    gem 'shotgun' #if using puma
 end
+
+#tbd => synchrony
+#gem 'sinatra-synchrony', :require => 'sinatra/synchrony'
+#gem 'em-synchrony'
+#gem 'em-http-request'
+#gem 'rack-fiber_pool'
+#gem 'em-resolv-replace'
+
+#tbd => faraday
+#gem 'faraday'
+#gem 'faraday-stack', :require => 'faraday_stack'
