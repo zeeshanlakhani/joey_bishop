@@ -5,14 +5,15 @@ gem 'rake'
 gem 'rack'        
 
 gem 'puma'
-
 #backup => eventmachine
 #gem 'thin'
 
-gem 'httparty'
-
 gem 'bson_ext'
 gem 'mongoid'
+
+gem 'faraday'
+gem 'faraday-stack', :require => 'faraday_stack'
+gem 'typhoeus'
 
 gem 'sinatra', :require => 'sinatra/base'                
 gem 'sinatra-authentication'
@@ -40,7 +41,3 @@ end
 #gem 'em-http-request'
 #gem 'rack-fiber_pool'
 #gem 'em-resolv-replace'
-
-#tbd => faraday
-#gem 'faraday'
-#gem 'faraday-stack', :require => 'faraday_stack'

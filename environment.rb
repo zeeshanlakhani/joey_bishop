@@ -38,6 +38,12 @@ class Application < Sinatra::Base
 		:metastore =>'heap:/',
 		:entitystore =>'heap:/'
 
+	# Set Faraday adaptor + parse JSON responses
+	Faraday.default_connection = Faraday::Connection.new do |builder|
+		builder.use FaradayStack::ResponseJSON
+		builder.use Faraday::Adapter::Typhoeus
+	end
+
 	# ======================
 	# = Sinatra - Settings =
 	# ======================
