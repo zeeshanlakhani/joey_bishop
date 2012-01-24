@@ -1,4 +1,4 @@
-## joey_bishop
+## joey_bishop => currently in a state of crap, don't use!!!
 
 _Heavily Reliant and Influenced by_ [**sammy_davis_jr**](https://github.com/kyledrake/sammy_davis_jr) _by Kyle Drake_
 
