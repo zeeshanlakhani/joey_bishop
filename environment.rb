@@ -1,3 +1,4 @@
+#encodings working in rubinius with ruby 1.9, still being developed though
 Encoding.default_internal = 'UTF-8'
 # ==========================
 # = Requirement - *bundler =
