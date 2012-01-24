@@ -32,12 +32,5 @@ end
 group :development do
 	gem 'foreman'
     gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
-    gem 'shotgun' #if using puma
+    gem 'shotgun'
 end
-
-#tbd => synchrony
-#gem 'sinatra-synchrony', :require => 'sinatra/synchrony'
-#gem 'em-synchrony'
-#gem 'em-http-request'
-#gem 'rack-fiber_pool'
-#gem 'em-resolv-replace'

@@ -5,7 +5,7 @@ class Application < Sinatra::Base
 
 	#main handlers
 	get '/' do
-		log.info "The summer wind came blowin' in"
+		log.info "yeah"
 		@idx_header = "The Joey Bishop"
 		@page_title = "The Joey Bishop Special"
 		slim :index, :locals => {"voo" => "funnier"} #, :layout => false if you want a diff layout
