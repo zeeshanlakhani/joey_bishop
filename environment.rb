@@ -17,13 +17,16 @@ Dir.glob('./*.rb') do |file|
 	require file.gsub(/\.rb/, '')
 end
 
+# ====================
+# = general settings =
+# ====================
+Resque.redis = 'localhost:6379[2]'
+
 class Application < Sinatra::Base
 	# =========================================
 	# = Registrations and global Helpers here =
 	# =========================================
-	#tbd
-	#register Sinatra::Synchrony
-
+	register Sinatra::Flash
 	register Sinatra::Loader
 	configure do
 		load_helpers MyHelpers
@@ -32,7 +35,7 @@ class Application < Sinatra::Base
 	# ==============
 	# = Middleware =
 	# ==============
-	#use Rack::Flash
+	use Rack::ShowExceptions
 
 	use Rack::Cache,
 		:verbose => true,
@@ -53,6 +56,10 @@ class Application < Sinatra::Base
 
 	root_dir = File.dirname(__FILE__)
 
+	#options
+	set :raise_errors,    false
+  	set :show_exceptions, false
+
 	#directory settings => these are actually default to sinatra, but let's do it anyways
 	set :static, true
 	set :root,  root_dir
@@ -60,7 +67,7 @@ class Application < Sinatra::Base
 	set :views, Proc.new {File.join(root, "views")}
 
 	#cookie settings
-	#enable :sessions
+	enable :sessions
 	#set :session_secret, "OH"
 
 	#slim settings

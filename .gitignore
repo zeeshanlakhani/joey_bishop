@@ -8,6 +8,8 @@
 *_.*
 *.txt*
 *.log*
+*.pid*
+nohup.out
 
 #[RUBY]
 *.lock

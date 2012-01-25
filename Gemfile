@@ -14,12 +14,16 @@ gem 'mongoid'
 gem 'faraday'
 gem 'faraday-stack', :require => 'faraday_stack'
 gem 'typhoeus'
+gem 'json'
+
+gem 'resque', :require => 'resque'
 
 gem 'sinatra', :require => 'sinatra/base'                
 gem 'sinatra-authentication'
+gem 'sinatra-flash', :require => 'sinatra/flash'
 
 #rack gems here	
-gem 'rack-cache', :require => 'rack/cache'   
+gem 'rack-cache', :require => 'rack/cache'  
 
 gem 'slim'
 gem 'sass'

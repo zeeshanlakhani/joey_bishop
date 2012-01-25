@@ -1,5 +1,5 @@
 #set puma as the concurrent HTTP 1.1 server
-#\ -s puma 
+#\ -s puma
 
 require File.join(File.expand_path(File.dirname(__FILE__)), 'environment.rb')
 
