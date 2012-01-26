@@ -10,11 +10,13 @@
 *.log*
 *.pid*
 nohup.out
+.DS_Store
 
 #[RUBY]
 *.lock
 *.gem
 *.rbc
+.sass-cache
 .bundle
 .config
 coverage
