@@ -1,0 +1,9 @@
+body {
+	min-width: 960px;
+}
+
+$weight: 700;
+
+p {		
+	font-weight: $weight;
+}

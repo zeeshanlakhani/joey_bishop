@@ -6,7 +6,7 @@ doctype html
     | <html class="no-js ie7 oldie" lang="en">
 /[if IE 8]
     | <html class="no-js ie8 oldie" lang="en">
-/[if gte IE 8]
+/[if (gte IE 9)|!(IE)]
     | <html class="no-js" lang="en">
 
 head
@@ -17,9 +17,15 @@ head
     meta name="author" content="Joey Bishop"
     meta name="keywords" content=""
     meta name="viewport" content="width=device-width, initial-scale=1"
-    stylesheet_link_tag :main
-    csrf_meta_tags
-    /= javascript_include_tag "/js/modernizr-2.0.6.min.js"
+
+    /! links
+    link rel='stylesheet/less' type='text/css' href='/bootstrap/lib/bootstrap.less'
+    link rel='stylesheet' type='text/css' href='/css/main.css'
+    link rel='shortcut icon' href='/favicon.ico'
+    link rel='apple-touch-icon' href='/apple-touch-icon.png'
+
+    /! modernizr
+    script src="/js/libs/modernizr-2.0.6.js"
 
     javascript:
         var environment = {
@@ -27,7 +33,7 @@ head
         };
 
 body
-    #dcontainer
+    #container
         header
         #main
             == yield
@@ -37,24 +43,25 @@ body
             small
             | joey_bishop => #{Time.now.year} NYPL_Labs
 
-script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+    script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
     javascript:
-        window.jQuery || document.write("<script src='/js/jquery-1.7.1.min.js'>\\x3C/script>")
+        window.jQuery || document.write("<script src='/js/libs/jquery-1.7.1.min.js'>\\x3C/script>")
+    script src="/js/libs/less-1.2.1.min.js"
 
-    /= javascript_include_tag :application
+    /! plugins
+    script src="/js/plugins.js"
 
-/plugins
-script src="/js/plugins.js"
+    /! main.js file
+    script src="/js/main.js"
 
-/[if lt IE 7]
-    script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"
+    /[if lt IE 7]
+        script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"
+        javascript:
+            window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})
+
     javascript:
-        window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})
-| </html>
-
-javascript:
-    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]]; //Change UA-XXXXX-X to be your site's ID 
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-    s.parentNode.insertBefore(g,s)}(document,"script"));
+        var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]]; //Change UA-XXXXX-X to be your site's ID 
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+        g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+        s.parentNode.insertBefore(g,s)}(document,"script"));
 

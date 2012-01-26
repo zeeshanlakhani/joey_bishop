@@ -37,10 +37,10 @@ class Application < Sinatra::Base
 	# ==============
 	use Rack::ShowExceptions
 
-	use Rack::Cache,
-		:verbose => true,
-		:metastore =>'heap:/',
-		:entitystore =>'heap:/'
+	#use Rack::Cache,
+	#	:verbose => true,
+	#	:metastore =>'heap:/',
+	#	:entitystore =>'heap:/'
 
 	# Set Faraday adaptor + parse JSON responses
 	Faraday.default_connection = Faraday::Connection.new do |builder|
@@ -60,11 +60,11 @@ class Application < Sinatra::Base
 	set :raise_errors,    false
   	set :show_exceptions, false
 
-	#directory settings => these are actually default to sinatra, but let's do it anyways
-	set :static, true
+	#directory settings
+	set :static_cache_control, [:public, :max_age => 300]
 	set :root,  root_dir
-	set :public_directory, Proc.new {File.join(root, "public")}
-	set :views, Proc.new {File.join(root, "views")}
+	set :public_folder, 'public'
+	set :views, 'views'
 
 	#cookie settings
 	enable :sessions
@@ -83,6 +83,7 @@ class Application < Sinatra::Base
 	end
 
 	configure :production do
+		set :sass, { :style => :compressed }
 	end
 end
 

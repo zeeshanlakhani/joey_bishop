@@ -27,6 +27,7 @@ gem 'rack-cache', :require => 'rack/cache'
 
 gem 'slim'
 gem 'sass'
+gem 'less'
 
 group :test do
 	gem 'rack-test', :require => 'rack/test'

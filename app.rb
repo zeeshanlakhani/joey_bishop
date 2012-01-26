@@ -1,6 +1,12 @@
 #really, a set of controllers, but is the app!
 class Application < Sinatra::Base
-	#scss to css handlers
+
+	#scss/less to css handlers
+	get '/css/:application.css' do |application|
+		if !application.include? 'bootstrap'
+			scss :"scss/#{application}"
+		end
+	end
 
 	#main handlers
 	get '/' do
