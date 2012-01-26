@@ -35,7 +35,7 @@ group :test do
 end
 
 group :development do
-	gem 'foreman'
+    gem 'foreman'
     gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
     gem 'shotgun'
 end
