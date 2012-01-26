@@ -6,7 +6,6 @@
 *.bak
 *._*
 *_.*
-*.txt*
 *.log*
 *.pid*
 nohup.out
