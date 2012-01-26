@@ -27,6 +27,9 @@ head
     /! modernizr
     script src="/js/libs/modernizr-2.0.6.js"
 
+     /! require.js
+    script data-main="js/main.js" src="/js/libs/require-jquery.js"
+
     javascript:
         var environment = {
             page_title: '#{@page_title}'
@@ -43,16 +46,13 @@ body
             small
             | joey_bishop => #{Time.now.year} NYPL_Labs
 
-    script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
-    javascript:
-        window.jQuery || document.write("<script src='/js/libs/jquery-1.7.1.min.js'>\\x3C/script>")
-    script src="/js/libs/less-1.2.1.min.js"
+    /script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+    /javascript:
+    /    window.jQuery || document.write("<script src='/js/libs/jquery-1.7.1.min.js'>\\x3C/script>")
+    /script src="/js/libs/less-1.2.1.min.js"
 
     /! plugins
     script src="/js/plugins.js"
-
-    /! main.js file
-    script src="/js/main.js"
 
     /[if lt IE 7]
         script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"

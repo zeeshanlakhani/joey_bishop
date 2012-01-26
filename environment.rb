@@ -37,10 +37,10 @@ class Application < Sinatra::Base
 	# ==============
 	use Rack::ShowExceptions
 
-	#use Rack::Cache,
-	#	:verbose => true,
-	#	:metastore =>'heap:/',
-	#	:entitystore =>'heap:/'
+	use Rack::Cache,
+		:verbose => true,
+		:metastore =>'heap:/',
+		:entitystore =>'heap:/'
 
 	# Set Faraday adaptor + parse JSON responses
 	Faraday.default_connection = Faraday::Connection.new do |builder|
