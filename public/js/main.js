@@ -4,7 +4,7 @@ require.config({
 	}
 });
 
-require(["jquery", "/js/libs/modernizr-2.0.6.js", "plugins", "/js/libs/less-1.2.1.min.js"], function($) {
+require(["jquery", "/js/libs/modernizr-2.0.6.js", "plugins"], function($) {
     $(function() {
     	log("foo");
     });
