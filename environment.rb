@@ -18,9 +18,22 @@ Dir.glob('./*.rb') do |file|
 end
 
 # ====================
-# = general settings =
+# = db/offload settings =
 # ====================
-Resque.redis = 'localhost:6379[2]'
+Resque.redis = 'localhost:6379[1]'
+
+database_name = case Sinatra::Base.environment
+	when :development then 'dev_project'
+	when :production then 'prod_project'
+end
+
+Mongoid.configure do |config|
+	name = 'nypl_project'
+	port = 27017
+	host = 'localhost'
+	config.master = Mongo::Connection.new.db(database_name)
+	identity_map_enabled = true
+end
 
 class Application < Sinatra::Base
 	# =========================================

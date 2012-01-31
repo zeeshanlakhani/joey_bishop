@@ -5,8 +5,6 @@ gem 'rake'
 gem 'rack'        
 
 gem 'puma'
-#backup => eventmachine
-#gem 'thin'
 
 gem 'bson_ext'
 gem 'mongoid'

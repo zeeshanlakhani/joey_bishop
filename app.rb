@@ -10,7 +10,7 @@ class Application < Sinatra::Base
 
 	#main handlers
 	get '/' do
-		log.info "yeah"
+		log.info "yeah index"
 		@idx_header = "The Joey Bishop"
 		@page_title = "The Joey Bishop Special"
 		flash.now[:notice] = "good times at #{Time.now}." #=> using sinatra/flash
@@ -23,7 +23,7 @@ class Application < Sinatra::Base
 		content_type :json
 		resp = Faraday.get\
 			"https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true"
-		"#{resp.body[0]}\n#{resp.body[0].class}"
+		return "#{resp.body[0]}\n#{resp.body[0].class}"
 	end
 
 	#call to offload

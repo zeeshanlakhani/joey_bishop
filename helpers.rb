@@ -22,6 +22,10 @@ module MyHelpers
 			@log = Logger.new(STDERR)
 			@log = Logger.new(STDOUT)
 			@log.level = Logger::DEBUG
+			
+			if defined?(Mongoid)
+				Mongoid.logger = Logger.new(STDOUT)
+			end
 			return @log
 		end
 	end
