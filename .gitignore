@@ -19,6 +19,7 @@ nohup.out
 .bundle
 .config
 coverage
+gem_graph.*
 InstalledFiles
 lib/bundler/man
 pkg
