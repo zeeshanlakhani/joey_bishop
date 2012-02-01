@@ -28,11 +28,12 @@ head
     script src="/js/libs/less-1.2.1.min.js"
 
     /! require.js => special version
-    script data-main="js/main.js" src="/js/libs/require-jquery.js"
+    script data-main="/js/main.js" src="/js/libs/require-jquery.js"
 
     javascript:
         var environment = {
-            page_title: '#{@page_title}'
+            page_title: '#{@page_title}',
+            deps: ["views/testview"]
         };
 
 body

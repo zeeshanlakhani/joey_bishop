@@ -1,6 +1,5 @@
 #really, a set of controllers, but is the app!
 class Application < Sinatra::Base
-
 	#scss/less to css handlers
 	get '/css/:application.css' do |application|
 		if !application.include? 'bootstrap'
@@ -32,6 +31,15 @@ class Application < Sinatra::Base
 		content_type :json
 		Resque.enqueue(UserForgive, params['user'])
 		{"foo" => "some"}.to_json
+	end
+
+	not_found do
+		status 404
+		slim :not_found, :locals => {"voo" => "404"}
+	end
+
+	error do
+
 	end
 
 end
