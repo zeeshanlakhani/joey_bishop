@@ -52,7 +52,7 @@ define(['jquery', 'underscore', 'backbone', 'models/testmodel', 'collections/pro
 
 		render: function() {
 			var self = this;
-			$(this.el).append("<button class='btn primary' id='add'>Add list item</button>");
+			$(this.el).append("<button class='btn' id='add'>Add list item</button>");
 			$(this.el).append("<ul></ul>");
 			_(this.collection.models).each(function(item) { // in case collection is not empty
 				self.appendItem(item);

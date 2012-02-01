@@ -12,8 +12,8 @@ define(['require', 'jquery', 'backbone'], function(require, $, Backbone, testvie
 			}
 		},
 
-		onDependsLoaded: function(TestView) {
-			var testview = new TestView;
+		onDependsLoaded: function(TestModule) {
+			var testmodule = new TestModule;
 		}
 	};
 });
