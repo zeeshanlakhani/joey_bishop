@@ -1,6 +1,6 @@
-[submodule "public/bootstrap"]
-	path = public/bootstrap
-	url = https://github.com/twitter/bootstrap.git
 [submodule "freedom.txt"]
 	path = freedom.txt
 	url = git://github.com/mvanveen/freedom.txt.git
+[submodule "public/bootstrap"]
+	path = public/bootstrap
+	url = git://github.com/twitter/bootstrap.git
