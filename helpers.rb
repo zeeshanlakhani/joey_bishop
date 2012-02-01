@@ -29,4 +29,15 @@ module MyHelpers
 			return @log
 		end
 	end
+
+	module JSarray
+		extend self
+		def js_array(name, array)
+			js = "var #{name} = new Array();\n"
+			array.each do |i|
+				js << "#{name}.push(#{i})\n"
+			end
+			js
+		end
+	end
 end

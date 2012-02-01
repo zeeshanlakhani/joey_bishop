@@ -3,7 +3,7 @@ class Application < Sinatra::Base
 	#scss/less to css handlers
 	get '/css/:application.css' do |application|
 		if !application.include? 'bootstrap'
-			scss :"scss/#{application}"
+			scss :"#{application}", :views => './public/scss'
 		end
 	end
 
@@ -12,6 +12,7 @@ class Application < Sinatra::Base
 		log.info "yeah index"
 		@idx_header = "The Joey Bishop"
 		@page_title = "The Joey Bishop Special"
+		@deps = ["views/testmodule"]
 		flash.now[:notice] = "good times at #{Time.now}." #=> using sinatra/flash
 		slim :index, :locals => {"voo" => "funnier"} #, :layout => false if you want a diff layout
 	end

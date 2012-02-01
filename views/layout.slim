@@ -19,13 +19,10 @@ head
     meta name="viewport" content="width=device-width, initial-scale=1"
 
     /! links
-    link rel='stylesheet/less' type='text/css' href='/bootstrap/less/bootstrap.less'
+    link rel='stylesheet' type='text/css' href='/css/bootstrap.css'
     link rel='stylesheet' type='text/css' href='/css/main.css'
     link rel='shortcut icon' href='/favicon.ico'
-    link rel='apple-touch-icon' href='/apple-touch-icon.png'
-
-    /!less.js
-    script src="/js/libs/less-1.2.1.min.js"
+    link rel='apple-touch-icon' href='/apple-touch-icon.png' 
 
     /! require.js => special version
     script data-main="/js/main.js" src="/js/libs/require-jquery.js"
@@ -33,7 +30,7 @@ head
     javascript:
         var environment = {
             page_title: '#{@page_title}',
-            deps: ["views/testmodule"]
+            deps: $.parseJSON('#{{@deps}}')
         };
 
 body

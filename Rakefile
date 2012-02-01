@@ -16,3 +16,11 @@ desc "Start it up!"
 task :singit do 
 	exec 'rerun -p "**/*.{rb,js,css,scss,sass,erb,html,haml,ru,coffee,slim,less}" -- bundle exec rackup --port 8888 config.ru'
 end
+
+desc "less => css"
+task :less_css do
+	sh %{cd public/bootstrap/less; lessc bootstrap.less > ../../../public/css/bootstrap.css}
+	Dir.glob('public/less/*.less') do |file|
+		exec 'lessc #{file} > public/css/#{file}.css'
+	end
+end
