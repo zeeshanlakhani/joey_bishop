@@ -13,6 +13,15 @@ module Sinatra
 	end
 end
 
+module Methods
+	def get(url)
+		return Faraday.get url
+	end
+
+	def post(url, data)
+		return Faraday.post url, data
+	end
+end
 
 module MyHelpers
 	module Logging
@@ -30,14 +39,19 @@ module MyHelpers
 		end
 	end
 
-	module JSarray
+	module Faraconn
 		extend self
-		def js_array(name, array)
-			js = "var #{name} = new Array();\n"
-			array.each do |i|
-				js << "#{name}.push(#{i})\n"
-			end
-			js
+		module Conn
+			extend Methods
+		end
+	end
+
+	module ErrorJson
+		extend self
+		attr_reader :error_json
+		def error_json(status, errtxt)
+			log.info status
+			@error_json = {'error' => "#{errtxt}", 'status' => "#{status}"}
 		end
 	end
 end

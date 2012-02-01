@@ -10,7 +10,7 @@ gem 'bson_ext'
 gem 'mongoid'
 
 gem 'faraday'
-gem 'faraday-stack', :require => 'faraday_stack'
+gem 'faraday_middleware'
 gem 'typhoeus'
 gem 'json'
 

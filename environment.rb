@@ -36,15 +36,6 @@ Mongoid.configure do |config|
 end
 
 class Application < Sinatra::Base
-	# =========================================
-	# = Registrations and global Helpers here =
-	# =========================================
-	register Sinatra::Flash
-	register Sinatra::Loader
-	configure do
-		load_helpers MyHelpers
-	end
-
 	# ==============
 	# = Middleware =
 	# ==============
@@ -55,10 +46,22 @@ class Application < Sinatra::Base
 		:metastore =>'heap:/',
 		:entitystore =>'heap:/'
 
-	# Set Faraday adaptor + parse JSON responses
-	Faraday.default_connection = Faraday::Connection.new do |builder|
-		builder.use FaradayStack::ResponseJSON
+	#Set Faraday adaptor + parse JSON responses
+	#farday 7.6 as of this code
+	Faraday.default_connection = Faraday.new do |builder|
+		builder.use FaradayMiddleware::EncodeJson
+		builder.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
+		builder.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
 		builder.use Faraday::Adapter::Typhoeus
+		builder.use Faraday::Response::Logger
+	end
+	# =========================================
+	# = Registrations and global Helpers here =
+	# =========================================
+	register Sinatra::Flash
+	register Sinatra::Loader
+	configure do
+		load_helpers MyHelpers
 	end
 
 	# ======================

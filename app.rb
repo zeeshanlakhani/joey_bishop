@@ -21,9 +21,8 @@ class Application < Sinatra::Base
 	get '/twitter' do
 		status 200
 		content_type :json
-		resp = Faraday.get\
-			"https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true"
-		return "#{resp.body[0]}\n#{resp.body[0].class}"
+		resp = Conn.get("https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true")
+		return "#{resp.body}\n#{resp.body.class}"
 	end
 
 	#call to offload
@@ -32,6 +31,16 @@ class Application < Sinatra::Base
 		content_type :json
 		Resque.enqueue(UserForgive, params['user'])
 		{"foo" => "some"}.to_json
+	end
+
+	post '/firewalkwithme' do
+		status 201
+		content_type :json
+		if !params.has_key?('director')
+			status 400
+			return error_json(status, 'bad news bears').to_json
+		end
+		{"foo" => "run some"}.to_json
 	end
 
 	not_found do
