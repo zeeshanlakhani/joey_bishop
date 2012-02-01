@@ -1,0 +1,2 @@
+export RBXOPT="-X19"
+rvm use --create rbx-2.0.0dev@joey_bishop
