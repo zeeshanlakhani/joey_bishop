@@ -19,7 +19,6 @@ class Application < Sinatra::Base
 
 	#http request w/ Faraday example
 	get '/twitter' do
-		status 200
 		content_type :json
 		resp = Conn.get("https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true")
 		return "#{resp.body}\n#{resp.body.class}"

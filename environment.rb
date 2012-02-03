@@ -68,7 +68,7 @@ class Application < Sinatra::Base
   	if settings.db_config.eql?('mongo')
 	  	Mongoid.load!("config/mongoid.yml")
   	else
-  		PostDB = Sequel.postgres('dev_project', :host => 'localhost', :user => 'user', :password => 'password', :port => 1234)
+  		#PostDB = Sequel.postgres('dev_project', :host => 'localhost', :user => 'user', :password => 'password', :port => 1234)
   	end
 
 	#directory settings

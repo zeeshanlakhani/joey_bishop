@@ -12,7 +12,7 @@ gem 'mongoid'
 
 #if postgres
 gem 'pg'
-gem 'sequel'
+#gem 'sequel'
 
 gem 'faraday'
 gem 'faraday_middleware'
