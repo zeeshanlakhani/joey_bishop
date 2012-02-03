@@ -68,7 +68,7 @@ class Application < Sinatra::Base
   	if settings.db_config.eql?('mongo')
 	  	Mongoid.load!("config/mongoid.yml")
   	else
-  		DB = Sequel.postgres('dev_project', :host => 'localhost')
+  		PostDB = Sequel.postgres('dev_project', :host => 'localhost', :user => 'user', :password => 'password', :port => 1234)
   	end
 
 	#directory settings
@@ -90,6 +90,10 @@ class Application < Sinatra::Base
 		puts "fun_times_had_by_all"
 		if defined?(Mongoid)
 			Mongoid.logger = Logger.new(STDOUT)
+		end
+
+		if defined?(PostDB)
+			PostDB.loggers << Logger.new(STDOUT)
 		end
 
 		#faraday default for dev w/logging
