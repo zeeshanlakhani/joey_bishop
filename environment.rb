@@ -17,23 +17,12 @@ Dir.glob('./*.rb') do |file|
 	require file.gsub(/\.rb/, '')
 end
 
-# ====================
+# =======================
 # = db/offload settings =
-# ====================
+# =======================
+
+#resque is kinda packaged in here... and you should use it... here we go!
 Resque.redis = 'localhost:6379[1]'
-
-database_name = case Sinatra::Base.environment
-	when :development then 'dev_project'
-	when :production then 'prod_project'
-end
-
-Mongoid.configure do |config|
-	name = 'nypl_project'
-	port = 27017
-	host = 'localhost'
-	config.master = Mongo::Connection.new.db(database_name)
-	identity_map_enabled = true
-end
 
 class Application < Sinatra::Base
 	# ==============
@@ -53,7 +42,6 @@ class Application < Sinatra::Base
 		builder.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
 		builder.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
 		builder.use Faraday::Adapter::Typhoeus
-		builder.use Faraday::Response::Logger
 	end
 	# =========================================
 	# = Registrations and global Helpers here =
@@ -75,6 +63,13 @@ class Application < Sinatra::Base
 	#options
 	set :raise_errors,    false
   	set :show_exceptions, false
+  	set :db_config, ENV["db_config"] || 'mongo'
+
+  	if settings.db_config.eql?('mongo')
+	  	Mongoid.load!("config/mongoid.yml")
+  	else
+  		DB = Sequel.postgres('dev_project', :host => 'localhost')
+  	end
 
 	#directory settings
 	set :static_cache_control, [:public, :max_age => 10]
@@ -93,6 +88,18 @@ class Application < Sinatra::Base
 	#app based configurations
 	configure :development do
 		puts "fun_times_had_by_all"
+		if defined?(Mongoid)
+			Mongoid.logger = Logger.new(STDOUT)
+		end
+
+		#faraday default for dev w/logging
+		Faraday.default_connection = Faraday.new do |builder|
+			builder.use FaradayMiddleware::EncodeJson
+			builder.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
+			builder.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
+			builder.use Faraday::Adapter::Typhoeus
+			builder.use Faraday::Response::Logger
+		end
 	end
 
 	configure :test do

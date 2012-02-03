@@ -1,0 +1,18 @@
+defaults: &defaults  
+ name: nypl_project
+ identity_map_enabled: true
+
+development:  
+ <<: *defaults
+ port: 27017
+ host: localhost
+ database: dev_project
+
+test:  
+ <<: *defaults
+
+production:  
+ <<: *defaults
+ port: 10015
+ host: <%= ENV['MONGOHQ_URL'] %>
+ database: prod_project

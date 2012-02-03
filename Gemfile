@@ -6,8 +6,12 @@ gem 'rack'
 
 gem 'puma'
 
+#if mongo
 gem 'bson_ext'
 gem 'mongoid'
+
+#if postgres
+
 
 gem 'faraday'
 gem 'faraday_middleware'
@@ -36,4 +40,7 @@ group :development do
     gem 'foreman'
     gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
     gem 'shotgun'
+
+    gem 'pg'
+    gem 'sequel'
 end

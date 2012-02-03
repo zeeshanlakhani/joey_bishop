@@ -43,6 +43,11 @@ class Application < Sinatra::Base
 		{"foo" => "run some"}.to_json
 	end
 
+	#mongo test one
+	get '/mongs' do
+		"Hello visitor n" + Counter.increment.to_s
+	end
+
 	not_found do
 		status 404
 		slim :not_found, :locals => {"voo" => "404"}
