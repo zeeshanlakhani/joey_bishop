@@ -8,7 +8,7 @@ require 'bundler/setup'
 
 Bundler.require
 
-%w(base64 digest/sha2 timeout date logger).each do |requirement|
+%w(base64 digest/sha2 timeout date logger yaml).each do |requirement|
 	require requirement
 end
 
@@ -16,13 +16,6 @@ end
 Dir.glob('./*.rb') do |file|
 	require file.gsub(/\.rb/, '')
 end
-
-# =======================
-# = db/offload settings =
-# =======================
-
-#resque is kinda packaged in here... and you should use it... here we go!
-Resque.redis = 'localhost:6379[1]'
 
 class Application < Sinatra::Base
 	# ==============
@@ -65,11 +58,16 @@ class Application < Sinatra::Base
   	set :show_exceptions, false
   	set :db_config, ENV["db_config"] || 'mongo'
 
+  	#db/offload settings
   	if settings.db_config.eql?('mongo')
 	  	Mongoid.load!("config/mongoid.yml")
   	else
   		#PostDB = Sequel.postgres('dev_project', :host => 'localhost', :user => 'user', :password => 'password', :port => 1234)
   	end
+
+  	#resque is kinda packaged in here... and you should use it... here we go!
+	config = YAML::load(File.open("config/redis.yml"))["#{Sinatra::Base.environment}"]
+	Resque.redis = Redis.new(:host => config['host'], :port => config['port'])
 
 	#directory settings
 	set :static_cache_control, [:public, :max_age => 10]
@@ -110,6 +108,7 @@ class Application < Sinatra::Base
 	end
 
 	configure :production do
+		#compressions
 		set :sass, { :style => :compressed }
 	end
 end

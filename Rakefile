@@ -2,6 +2,7 @@ require 'bundler'
 Bundler.setup
 require 'rake/testtask'
 
+require 'resque/pool/tasks'
 require 'resque/tasks'
 require File.join(File.expand_path(File.dirname(__FILE__)), 'offload.rb')
 

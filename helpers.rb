@@ -35,6 +35,7 @@ module MyHelpers
 		end
 	end
 
+	#faraday is a long name
 	module Faraconn
 		extend self
 		module Conn

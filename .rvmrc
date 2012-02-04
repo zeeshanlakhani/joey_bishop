@@ -1,2 +1,15 @@
-export RBXOPT="-X19"
-rvm use --create rbx-head@joey_bishop
+#!/usr/bin/env bash
+
+#help from https://github.com/krainboltgreene/magnitude/blob/master/.rvmrc
+
+environment_id="rbx-head"
+
+if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
+	&& -s "${rvm_path:-$HOME/.rvm}/environments/$environment_id" ]]
+then
+	export RBXOPT="-X19"
+	rvm use --create rbx-head@joey_bishop
+
+else
+	rvm use --create ruby-1.9.3-head@joey_bishop
+fi

@@ -1,0 +1,18 @@
+defaults: &defaults
+ host: localhost
+ port: 6379
+
+development:
+ <<: *defaults
+
+test:
+ <<: *defaults
+
+staging:
+ <<: *defaults
+
+production:
+ <<: *defaults
+ port: port
+ host: <%= ENV["REDISTOGO_URL"] %>
+ password: password

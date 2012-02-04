@@ -41,4 +41,9 @@ group :development do
     gem 'foreman'
     gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
     gem 'shotgun'
+    gem 'resque-pool'
+end
+
+group :production do
+	gem 'redis'
 end

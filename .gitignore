@@ -29,6 +29,7 @@ system.gems
 test/tmp
 test/version_tmp
 tmp
+log
 
 #[Rubinius]
 *.rbc
