@@ -1,4 +1,4 @@
-define(['require', 'jquery', 'backbone'], function(require, $, Backbone, testview) {
+define(['require', 'jquery', 'backbone'], function(require, $, Backbone) {
 	return {
 		initialize: function(args) {
 			log('init app');
@@ -13,7 +13,7 @@ define(['require', 'jquery', 'backbone'], function(require, $, Backbone, testvie
 		},
 
 		onDependsLoaded: function(TestModule) {
-			var testmodule = new TestModule;
+			TestModule;
 		}
 	};
 });

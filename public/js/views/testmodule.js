@@ -75,5 +75,5 @@ define(['jquery', 'underscore', 'backbone', 'models/testmodel', 'collections/pro
 		}
 	});
 
-	return ListView;
+	return new ListView;
 });
