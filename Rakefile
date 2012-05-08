@@ -28,13 +28,11 @@ namespace :app do
 	end
 	desc "less => css"
 	task :less_css do
-		puts "less => css"
-		Dir.glob('public/less/*.less').sort_by do |file|
-			exec "lessc #{file} --include-path=public/bootstrap/less/ \
-			> public/css/#{File.basename file, '.less'}.css"
+		sh %{cd public/bootstrap/less; lessc bootstrap.less > ../../../public/css/bootstrap.css}
+		Dir.glob('public/less/*.less') do |file|
+			exec 'lessc #{file} > public/css/#{file}.css'
 		end
 	end
-
 	desc "run all rakes in namespace app"
 	task :setup do
 		sh %{rake app:less_css; rake app:scss_css;}
