@@ -14,23 +14,24 @@ gem 'mongoid'
 gem 'pg'
 #gem 'sequel'
 
-gem 'faraday'
-gem 'faraday_middleware'
 gem 'typhoeus'
 gem 'json'
+gem 'dalli'
 
 gem 'resque', :require => 'resque'
 
 gem 'sinatra', :require => 'sinatra/base'                
-gem 'sinatra-authentication'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 #rack gems here	
 gem 'rack-cache', :require => 'rack/cache'  
+gem 'rack_csrf', :require => 'rack/csrf'  
 
 gem 'slim'
 gem 'sass'
-gem 'less'
+
+gem 'base32'
+gem 'uuidtools'
 
 group :test do
 	gem 'rack-test', :require => 'rack/test'
@@ -38,10 +39,12 @@ group :test do
 end
 
 group :development do
+	gem 'heroku'
     gem 'foreman'
     gem 'rerun' #yesness => https://github.com/alexch/rerun if thin
     gem 'shotgun'
     gem 'resque-pool'
+    gem 'fl-rocco'
 end
 
 group :production do

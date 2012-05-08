@@ -1,3 +1,7 @@
+#Globals
+hydra = Typhoeus::Hydra.new(:max_concurrency => 20)
+$HYDRA = hydra
+
 #really, a set of controllers, but is the app!
 class Application < Sinatra::Base
 	#scss/less to css handlers
@@ -20,8 +24,16 @@ class Application < Sinatra::Base
 	#http request w/ Faraday example
 	get '/twitter' do
 		content_type :json
-		resp = Conn.get("https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true")
-		return "#{resp.body}\n#{resp.body.class}"
+		conn = Typhoeus::Request.new("https://api.twitter.com/1/statuses/public_timeline.json?count=3&include_entities=true&trim_users=true")
+		conn.on_complete do |response|
+			JSON.parse(response.body)
+		end
+
+		$HYDRA.queue conn
+		$HYDRA.run
+		resp = conn.handled_response.first()
+
+		return "#{resp}\n#{resp.class}"
 	end
 
 	#call to offload

@@ -18,10 +18,23 @@ task :singit do
 	exec 'rerun -p "**/*.{rb,js,css,scss,sass,erb,html,haml,ru,coffee,slim,less}" -- bundle exec rackup --port 8888 config.ru'
 end
 
+desc "scss => css"
+task :scss_css do
+	puts "scss => css"
+	Dir.glob('public/scss/*.scss').sort_by do |file|
+		exec "sass --scss #{file}:public/css/#{File.basename file, '.scss'}.css"
+	end
+end
+
 desc "less => css"
 task :less_css do
 	sh %{cd public/bootstrap/less; lessc bootstrap.less > ../../../public/css/bootstrap.css}
 	Dir.glob('public/less/*.less') do |file|
 		exec 'lessc #{file} > public/css/#{file}.css'
 	end
+end
+
+desc "run all rakes in namespace app"
+task :setup do
+	sh %{rake app:less_css; rake app:scss_css;}
 end

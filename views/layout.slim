@@ -24,6 +24,8 @@ head
     link rel='shortcut icon' href='/favicon.ico'
     link rel='apple-touch-icon' href='/apple-touch-icon.png' 
 
+    /! load modernizr
+    script src="/js/modernizr-2.0.6.js" type="text/javascript"
     /! require.js => special version
     script data-main="/js/main.js" src="/js/libs/require-jquery.js"
 
@@ -50,7 +52,7 @@ body
             window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})
 
     javascript:
-        var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]]; //Change UA-XXXXX-X to be your site's ID 
+        var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
         (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
         g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
         s.parentNode.insertBefore(g,s)}(document,"script"));

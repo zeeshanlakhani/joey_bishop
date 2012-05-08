@@ -13,16 +13,6 @@ module Sinatra
 	end
 end
 
-module Methods
-	def get(url)
-		return Faraday.get url
-	end
-
-	def post(url, data)
-		return Faraday.post url, data
-	end
-end
-
 module MyHelpers
 	module Logging
 		extend self
@@ -35,11 +25,20 @@ module MyHelpers
 		end
 	end
 
-	#faraday is a long name
-	module Faraconn
+	module RandGen
 		extend self
-		module Conn
-			extend Methods
+		attr_reader :rand_id
+		def gen_random_id()
+			@rand_id = Base32.encode(Digest::MD5.digest(UUIDTools::UUID.random_create)).downcase!.split('=')[0]
+		end
+	end
+
+	module RandString
+		extend self
+		attr_reader :rand_string
+		def randstring(length)
+			chars = ('0'..'9').to_a + ('A'..'Z').to_a + ('a'..'z').to_a
+			@rand_string = chars.sort_by { rand }.join[0...length]
 		end
 	end
 
@@ -49,6 +48,35 @@ module MyHelpers
 		def error_json(status, errtxt)
 			log.info status
 			@error_json = {'error' => "#{errtxt}", 'status' => "#{status}"}
+		end
+	end
+
+	#more generic helpers
+	module IsNumeric
+		def is_numeric?(obj) 
+		   obj.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
+		end
+	end
+
+	module UserAgentMobileCheck
+		def isMobile(req_agent)
+			ua = AgentOrange::UserAgent.new(req_agent)
+			plat = @ua.device.platform.to_s.downcase
+			if ua.is_mobile? and plat.index('ipad').nil? and !req_agent.downcase.index('mobile').nil? and req_agent.downcase.index('tablet').nil?
+				return true
+			else
+				return false
+			end
+		end
+	end
+
+	module CSRF
+		def csrf_token()
+			Rack::Csrf.csrf_token(env)
+		end
+
+		def csrf_tag()
+			Rack::Csrf.csrf_tag(env)
 		end
 	end
 end

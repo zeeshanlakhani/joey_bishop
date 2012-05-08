@@ -23,19 +23,15 @@ class Application < Sinatra::Base
 	# ==============
 	use Rack::ShowExceptions
 
-	use Rack::Cache,
-		:verbose => true,
-		:metastore =>'heap:/',
-		:entitystore =>'heap:/'
+	# use Rack::Cache,
+	# 	:verbose => true,
+	# 	:metastore =>'heap:/',
+	# 	:entitystore =>'heap:/'
 
-	#Set Faraday adaptor + parse JSON responses
-	#farday 7.6 as of this code
-	Faraday.default_connection = Faraday.new do |builder|
-		builder.use FaradayMiddleware::EncodeJson
-		builder.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
-		builder.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
-		builder.use Faraday::Adapter::Typhoeus
-	end
+	use Rack::Deflater
+	use Rack::Session::Cookie, :secret => ENV['COOKIESECRET'] || "hello joey", :expire_after => 1200, :key => 'joeybishop'
+	use Rack::Csrf, :raise => true
+
 	# =========================================
 	# = Registrations and global Helpers here =
 	# =========================================
@@ -57,6 +53,7 @@ class Application < Sinatra::Base
 	set :raise_errors,    false
   	set :show_exceptions, false
   	set :db_config, ENV["db_config"] || 'mongo'
+  	set :protection, :except => [:remote_token, :frame_options] 
 
   	#db/offload settings
   	if settings.db_config.eql?('mongo')
@@ -92,15 +89,6 @@ class Application < Sinatra::Base
 
 		if defined?(PostDB)
 			PostDB.loggers << Logger.new(STDOUT)
-		end
-
-		#faraday default for dev w/logging
-		Faraday.default_connection = Faraday.new do |builder|
-			builder.use FaradayMiddleware::EncodeJson
-			builder.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
-			builder.use FaradayMiddleware::ParseJson, :content_type => /\bjson$/
-			builder.use Faraday::Adapter::Typhoeus
-			builder.use Faraday::Response::Logger
 		end
 	end
 

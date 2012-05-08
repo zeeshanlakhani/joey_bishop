@@ -1,5 +1,4 @@
 defaults: &defaults  
- name: nypl_labs_project
  identity_map_enabled: true
 
 development:  
